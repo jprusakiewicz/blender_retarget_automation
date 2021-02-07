@@ -1,5 +1,5 @@
 import os
-
+import sys
 import bpy
 import logging
 
@@ -9,7 +9,7 @@ def retarget_animation(import_scale, source_fbx_file_path, export_directory_path
     target = bpy.context.scene.collection.all_objects["Armature"]
     bpy.ops.object.select_all(action='DESELECT')
 
-    bpy.ops.better_import.fbx(filepath=source_fbx_file_path, my_scale=import_scale, use_auto_bone_orientation=False,
+    bpy.ops.better_import.fbx(filepath=source_fbx_file_path, my_scale=int(import_scale), use_auto_bone_orientation=False,
                               use_optimize_for_blender=True)
     bpy.ops.object.mode_set(mode='OBJECT')
 
@@ -33,3 +33,7 @@ def retarget_animation(import_scale, source_fbx_file_path, export_directory_path
                              object_types={'ARMATURE', 'MESH'}, apply_unit_scale=True, use_mesh_modifiers=True,
                              bake_anim=True, bake_anim_use_all_bones=True, bake_anim_use_nla_strips=False,
                              bake_anim_use_all_actions=False, bake_anim_force_startend_keying=False)
+
+
+if __name__ == "__main__":
+    retarget_animation(*sys.argv[1:])
