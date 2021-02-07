@@ -1,10 +1,11 @@
 import os
-
-import bpy
 import sys
 
+import bpy
+import logging
 
-def retarget_animation():
+
+def retarget_animation(import_scale: str, source_fbx_file_path: str, export_directory_path: str):
     bpy.ops.object.mode_set(mode='OBJECT')
     target = bpy.context.scene.collection.all_objects["Armature"]
     bpy.ops.object.select_all(action='DESELECT')
@@ -17,7 +18,8 @@ def retarget_animation():
     imported_objects = [o for o in bpy.context.selected_objects if o.type == 'ARMATURE']
 
     if len(imported_objects) > 1:
-        print("imported more than one armature!")  # todo use logging
+        logging.error("imported more than one armature!")
+        exit()
 
     source = imported_objects[0]
 
@@ -37,17 +39,11 @@ def retarget_animation():
 
 
 if __name__ == "__main__":
-    # import_scale = 1
-    # source_fbx_file_path = '../source/source.fbx'
-    # export_directory_path = '../exports'
-
-
     argv = sys.argv
     argv = argv[argv.index("--") + 1:]  # get all args after "--"
-    import_scale = int(argv[0])
-    source_fbx_file_path = argv[1]
-    export_directory_path = argv[2]
 
+    if len(argv) != 3:
+        logging.critical("wrong parameters count")
+        exit()
 
-    print(argv)
-    retarget_animation()
+    retarget_animation(*argv)
