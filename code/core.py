@@ -1,15 +1,16 @@
 import os
-import sys
+
 import bpy
-import logging
+import sys
 
 
-def retarget_animation(import_scale, source_fbx_file_path, export_directory_path):
+def retarget_animation():
     bpy.ops.object.mode_set(mode='OBJECT')
     target = bpy.context.scene.collection.all_objects["Armature"]
     bpy.ops.object.select_all(action='DESELECT')
 
-    bpy.ops.better_import.fbx(filepath=source_fbx_file_path, my_scale=int(import_scale), use_auto_bone_orientation=False,
+    bpy.ops.better_import.fbx(filepath=source_fbx_file_path, my_scale=int(import_scale),
+                              use_auto_bone_orientation=False,
                               use_optimize_for_blender=True)
     bpy.ops.object.mode_set(mode='OBJECT')
 
@@ -36,4 +37,17 @@ def retarget_animation(import_scale, source_fbx_file_path, export_directory_path
 
 
 if __name__ == "__main__":
-    retarget_animation(*sys.argv[1:])
+    # import_scale = 1
+    # source_fbx_file_path = '../source/source.fbx'
+    # export_directory_path = '../exports'
+
+
+    argv = sys.argv
+    argv = argv[argv.index("--") + 1:]  # get all args after "--"
+    import_scale = int(argv[0])
+    source_fbx_file_path = argv[1]
+    export_directory_path = argv[2]
+
+
+    print(argv)
+    retarget_animation()
