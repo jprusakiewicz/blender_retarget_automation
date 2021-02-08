@@ -1,8 +1,8 @@
+import logging
 import os
 import sys
 
 import bpy
-import logging
 
 
 def retarget_animation(import_scale: str, source_fbx_file_path: str, export_directory_path: str):
@@ -24,6 +24,10 @@ def retarget_animation(import_scale: str, source_fbx_file_path: str, export_dire
     source = imported_objects[0]
 
     source_animation_name = source.animation_data.action.name
+
+    frame_range = source.animation_data.action.frame_range
+    last_frame = frame_range[1]
+    bpy.context.scene.frame_end = last_frame
 
     target.animation_data.action = bpy.data.actions.get(source_animation_name)
     export_name = source_animation_name + '_DONE'
