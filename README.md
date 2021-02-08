@@ -28,7 +28,7 @@ Run `python main.py `in console.
 ## Going short with only one _.fbx_ file  
  ####(optional)
 If you want to process only one .fbx file you can use `core.py` file with _Blender_ command.
-It takes 4 arguments: import scale, source fbx file path, export directory path, export suffix
+It takes 4 arguments: import scale, source fbx file path, export directory path, export suffix  
 example:  
 `Blender ../target/target.blend --background --python core.py -- 1 ../source/ ../exports _DONE`
 
@@ -51,7 +51,9 @@ In my case it works with both '**blender**' and '**Blender**' (big and small let
 ## Error logs
 If there is any error produced by user, preventing code to work properly 
 (e.g. wrong user configuration) message will be logged.
-Be aware that it doesn't have to lie at the end of output.
+Be aware that it doesn't have to lie at the end of output.  
+![](https://imgur.com/eDaJ04t)
+
 
 1.0 version tested on 2.91.0 Blender version  
 Made with 🧠 by Jakub Prusakiewicz
