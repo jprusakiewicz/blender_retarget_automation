@@ -19,7 +19,7 @@ if __name__ == "__main__":
     source_files = get_all_fbx_files(settings.source_fbx_directory_path)
 
     for file in source_files:
-        command = ['blender', settings.target_file_path, '--background', '--python', settings.core_path, "--",
+        command = ['Blender', settings.target_file_path, '--background', '--python', settings.core_path, "--",
                    str(settings.import_scale), file, settings.export_directory_path]
         result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                 cwd=os.path.dirname(os.path.realpath(__file__)))
