@@ -35,6 +35,7 @@ def retarget_animation(import_scale: str, source_fbx_file_path: str, export_dire
     full_export_path = os.path.join(export_directory_path, export_name + ".fbx")
     bpy.ops.export_scene.fbx(filepath=full_export_path, use_selection=True, apply_scale_options="FBX_SCALE_UNITS",
                              object_types={'ARMATURE', 'MESH'}, apply_unit_scale=True, use_mesh_modifiers=True,
+                             add_leaf_bones=False, use_armature_deform_only=True,
                              bake_anim=True, bake_anim_use_all_bones=True, bake_anim_use_nla_strips=False,
                              bake_anim_use_all_actions=False, bake_anim_force_startend_keying=False)
 
