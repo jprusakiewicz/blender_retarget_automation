@@ -28,7 +28,7 @@ Run `python main.py `in console.
 ## Going short with only one _.fbx_ file  
  ####(optional)
 If you want to process only one .fbx file you can use `core.py` file with _Blender_ command.
-It takes 3 arguments: import_scale, source fbx file path, export directory path,  
+It takes 4 arguments: import scale, source fbx file path, export directory path, export suffix
 example:  
 `Blender ../target/target.blend --background --python core.py -- 1 ../source/ ../exports _DONE`
 
