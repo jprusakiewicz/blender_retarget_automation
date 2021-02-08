@@ -5,7 +5,7 @@ import sys
 import bpy
 
 
-def retarget_animation(import_scale: str, source_fbx_file_path: str, export_directory_path: str):
+def retarget_animation(import_scale: str, source_fbx_file_path: str, export_directory_path: str, export_suffix: str):
     bpy.ops.object.mode_set(mode='OBJECT')
     target = bpy.context.scene.collection.all_objects["Armature"]
     bpy.ops.object.select_all(action='DESELECT')
@@ -30,7 +30,7 @@ def retarget_animation(import_scale: str, source_fbx_file_path: str, export_dire
     bpy.context.scene.frame_end = last_frame
 
     target.animation_data.action = bpy.data.actions.get(source_animation_name)
-    export_name = source_animation_name + '_DONE'
+    export_name = source_animation_name + export_suffix
     bpy.ops.object.select_all(action='DESELECT')
     bpy.ops.object.mode_set(mode='OBJECT')
 
@@ -48,8 +48,9 @@ if __name__ == "__main__":
     argv = sys.argv
     argv = argv[argv.index("--") + 1:]  # get all args after "--"
 
-    if len(argv) != 3:
+    if len(argv) != 4:
         logging.critical("wrong parameters count")
-        exit()
+        bpy.ops.wm.quit_blender()
+        exit()  # not sure if this line will be executed, but doesn't harm for sure
 
     retarget_animation(*argv)
