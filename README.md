@@ -30,7 +30,7 @@ Run `python main.py `in console.
 If you want to process only one .fbx file you can use `core.py` file with _Blender_ command.
 It takes 3 arguments: import_scale, source fbx file path, export directory path,  
 example:  
-`Blender ../target/target.blend --background --python core.py -- 1 ../source/ ../exports`
+`Blender ../target/target.blend --background --python core.py -- 1 ../source/ ../exports _DONE`
 
 
 ## Retarget and burnout process step by step  
