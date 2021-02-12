@@ -31,6 +31,7 @@ def retarget_animation(import_scale: str, source_fbx_file_path: str, export_dire
 
     target.animation_data.action = bpy.data.actions.get(source_animation_name)
     export_name = source_animation_name + export_suffix
+    bpy.context.scene.render.fps = 60
     bpy.ops.object.select_all(action='DESELECT')
     bpy.ops.object.mode_set(mode='OBJECT')
 
