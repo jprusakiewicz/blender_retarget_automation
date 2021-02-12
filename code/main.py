@@ -18,6 +18,8 @@ def log_subprocess_output(subproces_result: subprocess.CompletedProcess, encodin
 if __name__ == "__main__":
     source_files = get_all_fbx_files(settings.source_fbx_directory_path)
 
+    if len(source_files) == 0:
+        print("No source fbx files!")
     for file in source_files:
         command = ['Blender', settings.target_file_path, '--background', '--python', settings.core_path, "--",
                    str(settings.import_scale), file, settings.export_directory_path, settings.export_suffix]
