@@ -6,6 +6,9 @@ import bpy
 
 
 def retarget_animation(import_scale: str, source_fbx_file_path: str, export_directory_path: str, export_suffix: str):
+    imported_fbx_file_name = os.path.basename(source_fbx_file_path)
+    imported_fbx_file_name = imported_fbx_file_name[:-4] if imported_fbx_file_name[
+                                                            -4:] == ".fbx" else imported_fbx_file_name
     bpy.ops.object.mode_set(mode='OBJECT')
     target = bpy.context.scene.collection.all_objects["Armature"]
     bpy.ops.object.select_all(action='DESELECT')
@@ -30,7 +33,7 @@ def retarget_animation(import_scale: str, source_fbx_file_path: str, export_dire
     bpy.context.scene.frame_end = last_frame
 
     target.animation_data.action = bpy.data.actions.get(source_animation_name)
-    export_name = source_animation_name + export_suffix
+    export_name = imported_fbx_file_name + export_suffix
     bpy.context.scene.render.fps = 60
     bpy.ops.object.select_all(action='DESELECT')
     bpy.ops.object.mode_set(mode='OBJECT')
