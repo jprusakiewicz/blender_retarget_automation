@@ -3,7 +3,7 @@
 ## How to use
 
 Add Blender to env path 
-https://docs.blender.org/manual/en/2.79/advanced/command_line/introduction.html
+https://docs.blender.org/manual/en/2.93/advanced/command_line/launch/windows.html
 
 Add _.blend_ file to **target** folder  
 add (one or many) _.fbx_ files to **source** folder  
