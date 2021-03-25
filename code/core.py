@@ -5,16 +5,24 @@ import sys
 import bpy
 
 
-def retarget_animation(import_scale: str, source_fbx_file_path: str, export_directory_path: str, export_suffix: str):
+def retarget_animation(import_scale: str, source_fbx_file_path: str, export_directory_path: str, export_suffix: str,
+                       better_fbx_install_path: str):
     imported_fbx_file_name = os.path.basename(source_fbx_file_path)
     imported_fbx_file_name = imported_fbx_file_name.strip(".fbx")
     bpy.ops.object.mode_set(mode='OBJECT')
     target = bpy.context.scene.collection.all_objects["Armature"]
     bpy.ops.object.select_all(action='DESELECT')
+    try:
+        bpy.ops.better_import.fbx(filepath=source_fbx_file_path, my_scale=int(import_scale),
+                                  use_auto_bone_orientation=False,
+                                  use_optimize_for_blender=True)
+    except AttributeError:
+        bpy.ops.preferences.addon_install(filepath=better_fbx_install_path)
+        bpy.ops.preferences.addon_enable(module="better_import_fbx")
+        bpy.ops.better_import.fbx(filepath=source_fbx_file_path, my_scale=int(import_scale),
+                                  use_auto_bone_orientation=False,
+                                  use_optimize_for_blender=True)
 
-    bpy.ops.better_import.fbx(filepath=source_fbx_file_path, my_scale=int(import_scale),
-                              use_auto_bone_orientation=False,
-                              use_optimize_for_blender=True)
     bpy.ops.object.mode_set(mode='OBJECT')
 
     imported_objects = [o for o in bpy.context.selected_objects if o.type == 'ARMATURE']
@@ -28,7 +36,7 @@ def retarget_animation(import_scale: str, source_fbx_file_path: str, export_dire
     source_animation_name = source.animation_data.action.name
 
     frame_range = source.animation_data.action.frame_range
-    last_frame = frame_range[1]*5
+    last_frame = frame_range[1] * 5
     bpy.context.scene.frame_end = last_frame
 
     target.animation_data.action = bpy.data.actions.get(source_animation_name)
@@ -52,7 +60,7 @@ if __name__ == "__main__":
     argv = sys.argv
     argv = argv[argv.index("--") + 1:]  # get all args after "--"
 
-    if len(argv) != 4:
+    if len(argv) != 5:
         logging.critical("wrong parameters count")
         bpy.ops.wm.quit_blender()
         exit()  # not sure if this line will be executed, but doesn't harm for sure
