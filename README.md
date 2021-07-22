@@ -9,8 +9,11 @@ Add _.blend_ file to **target** folder
 add (one or many) _.fbx_ files to **source** folder  
 Go to **code** folder  
 Run `pip install -r requirements.txt`to install dependencies  
-Run `python main.py `in console.  
+Run `python main.py` or `python main.py --bake`in console.  
 
+## `--bake` parameter
+use --bake or -b parameter for baking mode
+use --nobake or run main.py script without parameter for no-baking mode
 
 ## user configuration 
 ####There are several parameters user can set in config.py file:
@@ -55,5 +58,9 @@ Be aware that it doesn't have to lie at the end of output.
 ![](https://imgur.com/eDaJ04t)
 
 
-1.0 version tested on 2.91.0 Blender version  
+1.1 version tested on 2.91.0 Blender version  
 Made with 🧠 by Jakub Prusakiewicz
+
+Changelog:  
+-additional parameter while running main.py file for baking/no-baking mode  
+-target_file_path in config.py split into target_file_path_bake and target_file_path_no_bake 
